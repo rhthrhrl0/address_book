@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+   <com.google.android.material.bottomnavigation.BottomNavigationView
+       android:id="@+id/bottomNavi"
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content"
+       android:layout_alignParentBottom="true"
+       android:layout_centerHorizontal="true"
+       android:background="#fff"
+       app:labelVisibilityMode="labeled"
+       app:menu="@menu/menu"
+       />
+        <!--alignParentBottom속성은 해당 뷰의 아래쪽을 부모컨테이너의 아래에 맞춤.
+        centerHorizontal은 부모 컨테이너의 수평방향중간에 맞춤.
+        label은 텍스트를 의미.
+        labelVisibilityMode는 라벨이 선택된 아이템만 보이게 할건지 다보이게 할건지 설정.
+        @menu/menu는 메뉴디렉터리 아래에 있는 menu와 연결해라.
+       -->
+        
+        <FrameLayout
+            android:id="@+id/main_frame"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+        <!--FrameLayout은 자식(Children)으로 추가된 여러 뷰(View) 위젯들 중 하나를
+         Layout의 전면에 표시할 때 사용하는 클래스다. 이 레이아웃을 틀로 삼아서 위에 프래그먼트를 띄울수있다.
+          기본적으로 왼쪽/상단에 위치한다.
+         Frame이 영어로 액자라는 의미.-->
+
+
+
+</RelativeLayout>
