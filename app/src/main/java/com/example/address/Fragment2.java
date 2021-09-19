@@ -46,10 +46,17 @@ public class Fragment2 extends Fragment {
             data.add(s);//data에 리스트 추가
         }
         String s="";
-        data.add(s);//스크롤할때 맨 아래 정보가 안보여서 추가했습니다.
+        data.add(s);//스크롤할때 맨 아래 정보가 안보여서 기본적으로 밑에 하나 깔꺼 추가했습니다.
         adapter.notifyDataSetChanged();//adapter 갱신
 
         return view;
+    }
+
+    public static Fragment2 newInstance() {
+        Bundle args = new Bundle();
+        Fragment2 fragment = new Fragment2();
+        fragment.setArguments(args);
+        return fragment;
     }
 
 }

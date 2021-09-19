@@ -2,10 +2,13 @@ package com.example.address;
 
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,8 +21,24 @@ public class Fragment1 extends Fragment {
 
     private View view;
     private Button add_button;
-    public EditText name;
-    public EditText phone;
+    public static EditText name;
+    public static EditText phone;
+    String n1; //프래그먼트 재생성시 번들에서 값 받을 변수
+    String p1; //프래그먼트 재생성시 번들에서 값 받을 변수
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        if(getArguments()!=null){ //프래그먼트1 처음생성이 아닐때
+            n1=getArguments().getString("name"); //데이터유지
+            p1=getArguments().getString("phone"); //데이터유지
+            /* getArguments() 는 Fragment 클래스에 있는 함수로
+            만약 setArguments(인자)에서 Bundle을 인자로 이 프래그먼트가 받았다면 사용가능함 */
+        }
+        else{   //프래그먼트1 처음 생성시
+            n1="";
+            p1="";
+        }
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -30,7 +49,10 @@ public class Fragment1 extends Fragment {
         name=view.findViewById(R.id.Name);
         phone=view.findViewById(R.id.Phone);
 
-        add_button.setOnClickListener(new View.OnClickListener() { //프래그먼트2로 이동
+        name.setText(n1);
+        phone.setText(p1);
+
+        add_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
@@ -44,12 +66,32 @@ public class Fragment1 extends Fragment {
                 else {
                     Toast.makeText(getActivity(),"등록성공",Toast.LENGTH_SHORT).show();
                     MainActivity.addUserProfile(name, phone);
+                    MainActivity.nm="";
+                    MainActivity.ph="";
+                    name.setText(MainActivity.nm);
+                    phone.setText(MainActivity.ph);
                 }
-
-
-
             }
         });
         return view;
     }
+
+    @Override
+    public void onSaveInstanceState(@NonNull Bundle outState) {
+        super.onSaveInstanceState(outState);
+        MainActivity.nm=name.getText().toString();
+        MainActivity.ph=phone.getText().toString();
+    }
+    //프래그먼트의 onSave()먼저 호출되고 그후 액티비티의 onSave()호출되므로 미리 액티비티에게 값을 넘겨줘야함
+
+
+    public static Fragment1 newInstance(String name, String phone) {
+        Bundle args = new Bundle();
+        Fragment1 f= new Fragment1();
+        args.putString("name",name);
+        args.putString("phone",phone);
+        f.setArguments(args);/*프래그먼트가 만약 재생성일 걸 대비해서
+        프래그먼트의 onCreate()함수에 넘겨줄 Bundle만들기(데이터유지위해)  */
+        return f;
+    } //newInstance()함수 종료 되어야 프래그먼트의 onCreate()호출함.
 }
