@@ -23,7 +23,7 @@ public class Fragment2 extends Fragment {
     private View view;
     private String result;
     private TextView text2;
-    public ListView list;
+    public ListView listview;
     public static Adapter_Address ad;
 
     @Override
@@ -34,16 +34,15 @@ public class Fragment2 extends Fragment {
 
         List<UserProfile> userProfileList=MainActivity.db.getUserProfileDao().getAll();
         // getALL()함수를 사용해 등록한 모든 회원의 정보를 받고 userProfileList라는 이름의 리스트 생성
-        Log.d("a","프래그먼트2 실행됨");
-        list=(ListView)view.findViewById(R.id.list); //프레그먼트 내 ListView위젯과 연결된 list변수
-        ad=new Adapter_Address();
-        list.setAdapter(ad);
 
-        //상식: ListView는 adapter에 담긴 내용을 보여준다. 즉 adapter에 연결된 data에 정보를 넣으면된다.
+        listview=(ListView)view.findViewById(R.id.list); //프레그먼트 내 ListView위젯과 연결된 list변수
+        ad=new Adapter_Address(); //어댑터 생성
+        listview.setAdapter(ad); //리스트뷰에 어댑터 연결
+        //ListView는 adapter의 배열에 있는 원소들을 보여준다.
 
         for(UserProfile userProfile: userProfileList){
             ad.add_Address(userProfile.name,userProfile.phone);
-        }
+        } //데이터베이스에 있는 객체들을 어댑터에 있는 배열에 넣어줌.
         ad.notifyDataSetChanged();//adapter 갱신
 
         return view;

@@ -31,22 +31,26 @@ public class Adapter_Address extends BaseAdapter {
     }
 
     @Override
-    public View getView(int i, View view, ViewGroup viewGroup) {
+    public View getView(int i, View view, ViewGroup viewGroup) { //i는 뷰그룹의 뷰가 있는 인덱스
         Context c=viewGroup.getContext();
+        // viewGroup의 환경정보(어떻게 진행됐는지)를 받음?(아직 컨텍스트가 정확히 무엇인지 머리에 잡히지않음)
         if(view==null){
             LayoutInflater li=(LayoutInflater) c.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+            //getSystemService는 String을 인자로 받고 Object형으로 리턴함.
             view=li.inflate(R.layout.item_view,viewGroup,false);
+            //inflate()는 레이아웃으로 화면 객체화시키기.
         }
         TextView item_name=view.findViewById(R.id.item_name);
         TextView item_phone=view.findViewById(R.id.item_phone);
         Button item_bt=view.findViewById(R.id.item_bt);
 
-        address a= addresses.get(i);
+        address a= addresses.get(i); //addresses 배열에 있는 i번째 인덱스의 원소(객체)를 받음.
+
+        //받은 객체의 정보를 사용해서 리스트뷰화면에 들어갈 뷰 한개 구성하기
         item_name.setText(a.getName());
         item_phone.setText(a.getPhone());
 
         List<UserProfile> userProfileList=MainActivity.db.getUserProfileDao().getAll();
-
 
         item_bt.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -56,7 +60,7 @@ public class Adapter_Address extends BaseAdapter {
                       Fragment2.ad.notifyDataSetChanged();
                       for(UserProfile userProfile: userProfileList){
                           for(;j==i;){
-                              MainActivity.deleteUserProfile(userProfile);
+                              MainActivity.db.getUserProfileDao().delete(userProfile);
                               break;
                           }
                           j++;
@@ -64,15 +68,13 @@ public class Adapter_Address extends BaseAdapter {
             }
         });
 
-
-
         return view;
     }
 
     public void add_Address(String name, String phone){
-        address people=new address();
-        people.setName(name);
-        people.setPhone(phone);
-        addresses.add(people);
+        address addr=new address();
+        addr.setName(name);
+        addr.setPhone(phone);
+        addresses.add(addr);
     }
 }

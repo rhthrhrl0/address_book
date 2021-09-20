@@ -52,6 +52,11 @@ public class MainActivity extends AppCompatActivity {
             getSupportFragmentManager().beginTransaction().replace(R.id.main_frame,f1).commit();
             fragment_state=1;
         }
+        //시작화면을 설정해줌.프래그먼트매니저는 액티비티와 프래그먼트를 이어주며 도움을 주는 역할이다.
+        //트랜잭션이란? 어떤 대상에 대해 추가,제거,변경 등 작업들이 발생하는 것을 묶은 것
+        // replace()의 첫번째 인자는 프래그먼트를 띄울 레이아웃이고 두번째 인자가 그 틀에 띄울화면이다
+        // commit()은 트랜잭션 마무리(즉 저장)
+
         db=Room.databaseBuilder(this,UserProfileDatabase.class,"userprofile").allowMainThreadQueries().build();
         //UserProfileDatabase.class에 해당하는 데이터베이스를 만들고 userdatabase라는 이름으로 사용
         //allowMainThreadQueries()로 메인스레드에서 데이터베이스에 접근가능해짐. 기본적으로 못쓰게 막아놓음.
@@ -60,10 +65,6 @@ public class MainActivity extends AppCompatActivity {
         //main.xml에 있는 bottomNavi를 연결시킴.
 
 
-        //시작화면을 설정해줌.프래그먼트매니저는 액티비티와 프래그먼트를 이어주며 도움을 주는 역할이다.
-        //트랜잭션이란? 어떤 대상에 대해 추가,제거,변경 등 작업들이 발생하는 것을 묶은 것
-        // replace()의 첫번째 인자는 프래그먼트를 띄울 레이아웃이고 두번째 인자가 그 틀에 띄울화면이다
-        // commit()은 트랜잭션 마무리(즉 저장)
 
         bottomNavigationView.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
             @Override
@@ -91,9 +92,6 @@ public class MainActivity extends AppCompatActivity {
       db.getUserProfileDao().insert(userProfile);
     }
 
-    static public void deleteUserProfile(UserProfile userProfile){
-        db.getUserProfileDao().delete(userProfile);
-    }
 
     @Override
     protected void onSaveInstanceState(@NonNull Bundle outState) {
