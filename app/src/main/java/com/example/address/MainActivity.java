@@ -91,6 +91,10 @@ public class MainActivity extends AppCompatActivity {
       db.getUserProfileDao().insert(userProfile);
     }
 
+    static public void deleteUserProfile(UserProfile userProfile){
+        db.getUserProfileDao().delete(userProfile);
+    }
+
     @Override
     protected void onSaveInstanceState(@NonNull Bundle outState) {
         super.onSaveInstanceState(outState);
@@ -98,6 +102,5 @@ public class MainActivity extends AppCompatActivity {
         outState.putString("phone",ph);
         outState.putInt("fragment_state",fragment_state);
     }
-
 
 }
