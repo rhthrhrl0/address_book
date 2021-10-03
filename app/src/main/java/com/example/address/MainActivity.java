@@ -88,7 +88,7 @@ public class MainActivity extends AppCompatActivity {
     static public void addUserProfile(EditText name,EditText phone){//데이터베이스에 유저등록
       UserProfile userProfile=new UserProfile(); //빈객체 생성
       userProfile.change(name.getText().toString(),phone.getText().toString());
-      // getText()는 CharSequence로 리턴하므로 toString()해줘야함야한다.
+      // getText()는 CharSequence로 리턴하므로 toString()해줘야한다.
       db.getUserProfileDao().insert(userProfile);
     }
 

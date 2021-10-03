@@ -2,6 +2,7 @@ package com.example.address;
 
 import android.content.Context;
 import android.graphics.drawable.Drawable;
+import android.text.util.Linkify;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -42,6 +43,7 @@ public class Adapter_Address extends BaseAdapter {
         }
         TextView item_name=view.findViewById(R.id.item_name);
         TextView item_phone=view.findViewById(R.id.item_phone);
+
         Button item_bt=view.findViewById(R.id.item_bt);
 
         address a= addresses.get(i); //addresses 배열에 있는 i번째 인덱스의 원소(객체)를 받음.
