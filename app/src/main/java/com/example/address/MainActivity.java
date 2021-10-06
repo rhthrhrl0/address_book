@@ -58,7 +58,7 @@ public class MainActivity extends AppCompatActivity {
         // commit()은 트랜잭션 마무리(즉 저장)
 
         db=Room.databaseBuilder(this,UserProfileDatabase.class,"userprofile").allowMainThreadQueries().build();
-        //UserProfileDatabase.class에 해당하는 데이터베이스를 만들고 userdatabase라는 이름으로 사용
+        //UserProfileDatabase.class를 활용하여 userprofile이라는 데이터베이스 파일을 사용하겠다.SQlite는 대소문자구분없음.
         //allowMainThreadQueries()로 메인스레드에서 데이터베이스에 접근가능해짐. 기본적으로 못쓰게 막아놓음.
 
         bottomNavigationView=findViewById(R.id.bottomNavi);
@@ -96,6 +96,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onSaveInstanceState(@NonNull Bundle outState) {
         super.onSaveInstanceState(outState);
+
         outState.putString("name",nm);
         outState.putString("phone",ph);
         outState.putInt("fragment_state",fragment_state);

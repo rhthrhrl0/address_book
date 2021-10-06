@@ -35,11 +35,11 @@ public class Adapter_Address extends BaseAdapter {
     public View getView(int i, View view, ViewGroup viewGroup) { //i는 뷰그룹의 뷰가 있는 인덱스
         Context c=viewGroup.getContext();
         // viewGroup의 환경정보(어떻게 진행됐는지)를 받음?(아직 컨텍스트가 정확히 무엇인지 머리에 잡히지않음)
-        if(view==null){
-            LayoutInflater li=(LayoutInflater) c.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        if(view==null) {
+            LayoutInflater li = (LayoutInflater) c.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             //getSystemService는 String을 인자로 받고 Object형으로 리턴함.
-            view=li.inflate(R.layout.item_view,viewGroup,false);
-            //inflate()는 레이아웃으로 화면 객체화시키기.
+            view = li.inflate(R.layout.item_view, viewGroup, false);
+            //inflate()는 액티비티가 아닌 동적으로 UI생성시 사용함.
         }
         TextView item_name=view.findViewById(R.id.item_name);
         TextView item_phone=view.findViewById(R.id.item_phone);

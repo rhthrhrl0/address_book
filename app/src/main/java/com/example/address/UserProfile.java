@@ -3,7 +3,7 @@ package com.example.address;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
-@Entity //객체
+@Entity //객체이자 테이블 그자체의 개념이다.
 public class UserProfile {
     @PrimaryKey(autoGenerate = true)//PrimaryKey값을 i에 자동생성
     int i; //Primary키 값을 갖는다.
